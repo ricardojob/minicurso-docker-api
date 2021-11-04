@@ -8,7 +8,7 @@ COPY create.sql /docker-entrypoint-initdb.d/
 COPY insert.sql /docker-entrypoint-initdb.d/
 ```
 ## Criar uma imagem do banco PostgreSQL
-`docker build -t ricardojob/banco ./postgres`:  
+`docker image build -t ricardojob/banco ./postgres`:  
 *`-t`: qual a tag que vamos atribuir a essa imagem*  
 *`./postgres`: caminho relativo (ou absoluto) para o arquivo Dockerfile*  
 
@@ -21,14 +21,14 @@ COPY target/app.war $DEPLOY_DIR
 
 ## Criar uma imagem da aplicação
 
-`docker build -t ricardojob/app .`:  
+`docker image build -t ricardojob/app .`:  
 *`-t`: qual a tag que vamos atribuir a essa imagem*  
 *`.`: caminho relativo (ou absoluto) para o arquivo Dockerfile*  
 
 ## Executar o container  
 
-`docker run -p 5433:5432 --name bd -d ricardojob/bd` e 
-`docker run -p 8082:8080 --name app --link bd:host-banco ricardojob/app`:   
+`docker container run -p 5433:5432 --name bd -d ricardojob/bd` e 
+`docker container run -p 8082:8080 --name app --link bd:host-banco ricardojob/app`:   
 *`-p`: o bind entre a porta do host local com a porta do container*  
 *`-d`: o container seja executar em background*  
 *`--link`: o bind entre os containers, para pertimir que o container da aplicação tenha acesso ao container do banco*  

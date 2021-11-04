@@ -1,6 +1,4 @@
-# docker image build -t ricardojob/bd ./postgres
-# docker container run -p 5433:5432 --name bd -d ricardojob/bd 
 cd app && mvn clean package && cd ..
-docker image build -t ricardojob/app ./app
-docker container run -p 8080:8080 --name app ricardojob/app
+docker image build -t ricardojob/app2 ./app
+docker container run -p 8081:8080 --name app ricardojob/app2
 # echo 'fim'
