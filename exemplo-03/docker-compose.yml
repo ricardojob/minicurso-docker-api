@@ -1,0 +1,39 @@
+version: '3'
+services:   
+  banco:
+    container_name: banco
+    image: ricardojob/banco
+    build: ./postgres
+    ports: 
+    - "5433:5432"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+  app:
+    container_name: app
+    image: ricardojob/app
+    build: ./app
+    ports: 
+     - "8080:8080"
+    depends_on: 
+     - banco
+    links: 
+     - "banco:host-banco"  
+
+  # webapp:
+  #   build:
+  #     context: ./dir
+  #     dockerfile: Dockerfile-prod
+  #     args:
+  #       buildno: 1
+  #     network: custom_network_1 
+  #     target: prod
+  #   env_file: .env
+  #   command: bundle exec thin -p 3000
+  #   entrypoint: /code/entrypoint.sh
+  #   environment:
+  #     - RACK_ENV=development
+  #     - SHOW=true
+  #   expose:
+  #     - "3000"
+  #     - "8000"
+      
