@@ -1,0 +1,23 @@
+version: "3"
+services:
+  postgres:
+    container_name: db-clientes
+    image: ricardojob/db-clientes
+    build: ./postgres
+    ports:
+     - "5434:5432"
+  core:
+    container_name: app-core
+    build: ./app
+    image: ricardojob/app-core
+    depends_on: 
+    - "postgres"
+    ports:
+     - "8082:8080"
+     - 4848 
+     - 8009 
+     - 9009 
+     - 8181 
+     - 3700
+    links:
+     - "postgres:host-banco"
